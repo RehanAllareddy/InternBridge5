@@ -91,6 +91,38 @@ export default function About() {
           ))}
         </div>
       </section>
+
+      {/* Founder */}
+      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-28">
+        <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4">Meet The Founder</div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+          <div className="lg:col-span-1">
+            <div className="aspect-square w-full max-w-sm rounded-2xl bg-gradient-to-br from-slate-900 via-[#0b1326] to-blue-700 flex items-center justify-center text-white shadow-xl">
+              <div className="text-center px-6">
+                <div className="font-black text-7xl tracking-tight">RA</div>
+                <div className="mt-4 text-[10px] tracking-[0.4em] uppercase text-blue-200">Founder</div>
+              </div>
+            </div>
+          </div>
+          <div className="lg:col-span-2">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-[1.05] text-slate-900">
+              Rehan <span className="text-blue-600">Allareddy</span>
+            </h2>
+            <div className="mt-2 text-sm font-mono text-slate-500">Founder &amp; CEO · InternBridge</div>
+            <div className="mt-6 space-y-4 text-slate-700 text-[15px] leading-relaxed max-w-2xl">
+              <p>
+                Rehan Allareddy is the founder of InternBridge — a platform built from the conviction that ambition shouldn't be limited by zip code, connections, or background. As a high school student himself, Rehan saw first-hand how difficult it was for students to discover serious, real-world internship opportunities outside the usual networks.
+              </p>
+              <p>
+                He started InternBridge to fix that. What began as a personal spreadsheet of opportunities has grown into a curated directory used by students across the country, surfacing pathways into STEM, medicine, business, the arts, and beyond.
+              </p>
+              <p>
+                Beyond InternBridge, Rehan is passionate about education access, youth entrepreneurship, and building tools that compound opportunity for the next generation. His mission is simple: make sure every student who is hungry to learn can find a door that opens.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

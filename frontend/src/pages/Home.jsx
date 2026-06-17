@@ -15,7 +15,7 @@ export default function Home() {
               <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
               {STATS.opportunities}+ Opportunities Live
             </div>
-            <h1 className="font-display font-black uppercase leading-[0.88] tracking-tight text-[clamp(64px,10vw,148px)]">
+            <h1 className="font-display font-black uppercase leading-[0.9] tracking-tight text-[clamp(48px,7vw,104px)]">
               <span className="block text-slate-900">Bridge</span>
               <span className="block text-slate-900">The</span>
               <span className="block text-blue-600">Gap.</span>
@@ -39,8 +39,15 @@ export default function Home() {
               ))}
             </div>
           </div>
-          {/* Right - Latest Placements */}
+          {/* Right - Logo + Latest Placements */}
           <div className="lg:pl-8">
+            <div className="flex justify-center lg:justify-end mb-10">
+              <img
+                src="https://customer-assets.emergentagent.com/job_bridge-internships/artifacts/s66q0dn8_768da46f-eeb4-4784-a15e-97681d97e863.png"
+                alt="InternBridge"
+                className="w-56 md:w-64 h-auto object-contain"
+              />
+            </div>
             <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-6">Latest Placements</div>
             <ul className="space-y-1">
               {LATEST_PLACEMENTS.map((p, i) => (
@@ -71,24 +78,6 @@ export default function Home() {
               <div className="mt-2 text-[10px] tracking-[0.4em] uppercase text-slate-500">{s.l}</div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* FEATURED OPPORTUNITY (Gradient) */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0b3aa8] via-[#1452d9] to-[#2b8bff] text-white p-10 md:p-14">
-          <div className="absolute inset-0 opacity-20 pointer-events-none" style={{backgroundImage:'radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.2) 0%, transparent 50%)'}} />
-          <div className="relative max-w-2xl">
-            <div className="text-[10px] tracking-[0.4em] uppercase text-blue-100 mb-4">Featured Opportunity</div>
-            <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">Featured Internship Opportunity with Cyma</h2>
-            <p className="mt-5 text-blue-50/90 text-[15px] leading-relaxed max-w-xl">
-              Gain hands-on experience working with an innovative team while building valuable professional skills. Apply today to take the next step in your career journey.
-            </p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeEYfjnnL2RJmKLIMbYwoUmaKWqo3lrwoApOearUmiVx9JVMA/viewform" target="_blank" rel="noreferrer" className="mt-7 inline-flex items-center gap-2 bg-white text-slate-900 px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-50 transition-colors">
-              Apply Now <ArrowUpRight className="w-4 h-4" />
-            </a>
-            <div className="mt-5 text-xs text-blue-100/80">Powered by Cyma × InternBridge</div>
-          </div>
         </div>
       </section>
 

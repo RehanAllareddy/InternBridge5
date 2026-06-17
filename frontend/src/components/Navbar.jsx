@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Building2, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+
+const LOGO_URL = 'https://customer-assets.emergentagent.com/job_bridge-internships/artifacts/s66q0dn8_768da46f-eeb4-4784-a15e-97681d97e863.png';
 
 const NAV = [
   { to: '/', label: 'Home' },
@@ -16,13 +18,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 backdrop-blur bg-white/80 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <span className="inline-flex items-center justify-center w-8 h-8 rounded-md bg-slate-900 text-white">
-            <Building2 className="w-4 h-4" />
-          </span>
-          <span className="text-[17px] font-extrabold tracking-tight">
-            <span className="text-slate-900">INTERN</span>
-            <span className="text-blue-600">BRIDGE</span>
-          </span>
+          <img src={LOGO_URL} alt="InternBridge" className="h-9 w-auto object-contain" />
         </Link>
         <nav className="hidden md:flex items-center gap-1">
           {NAV.map(n => (

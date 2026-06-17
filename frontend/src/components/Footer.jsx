@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Building2 } from 'lucide-react';
 import { STATS } from '../data/mock';
+
+const LOGO_URL = 'https://customer-assets.emergentagent.com/job_bridge-internships/artifacts/s66q0dn8_768da46f-eeb4-4784-a15e-97681d97e863.png';
 
 export default function Footer() {
   return (
@@ -11,13 +12,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-slate-800">
           <div>
             <Link to="/" className="flex items-center gap-2">
-              <span className="inline-flex items-center justify-center w-8 h-8 rounded-md bg-white/10 text-white">
-                <Building2 className="w-4 h-4" />
-              </span>
-              <span className="text-[17px] font-extrabold tracking-tight">
-                <span className="text-white">INTERN</span>
-                <span className="text-blue-500">BRIDGE</span>
-              </span>
+              <div className="bg-white rounded-md p-1.5 inline-flex">
+                <img src={LOGO_URL} alt="InternBridge" className="h-9 w-auto object-contain" />
+              </div>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-slate-400 max-w-xs">
               Bridging the gap between academic potential and professional opportunity. Built for high school students ready to make an impact.

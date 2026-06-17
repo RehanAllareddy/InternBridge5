@@ -3,9 +3,26 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Handshake, Sparkles, Network } from 'lucide-react';
 
 const PARTNERS = [
-  'Google', 'NASA', 'Harvard', 'MIT', 'Adobe', 'Bank of America',
-  'Goldman Sachs', 'JPMorgan', 'Microsoft', 'Amazon', 'IBM', 'Cisco',
-  'Pfizer', 'Mayo Clinic', 'NIH', 'Tesla', 'SpaceX', 'Stanford',
+  {
+    name: 'Caivo',
+    tagline: 'Innovation & Technology',
+    description: 'Tech-driven partner empowering students with hands-on engineering and product experience.',
+  },
+  {
+    name: 'CYMA',
+    tagline: 'Career Mentorship',
+    description: 'A featured collaborator providing real-world internship pathways and mentorship for ambitious students.',
+  },
+  {
+    name: 'YRI Fellowship',
+    tagline: 'Youth Research Initiative',
+    description: 'Selective research fellowship connecting high school students with leading academic researchers.',
+  },
+  {
+    name: 'ViraHacks',
+    tagline: 'Hackathons & Builder Community',
+    description: 'Premier student-run hackathon series turning curious students into builders and founders.',
+  },
 ];
 
 export default function Partners() {
@@ -23,10 +40,20 @@ export default function Partners() {
       </section>
 
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-20">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-px bg-slate-200 border border-slate-200 rounded-xl overflow-hidden">
+        <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-6">Our Partners</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {PARTNERS.map((p, i) => (
-            <div key={i} className="bg-white aspect-[3/2] flex items-center justify-center text-center px-4 hover:bg-slate-50 transition-colors">
-              <div className="font-bold text-slate-700 text-sm md:text-base">{p}</div>
+            <div key={i} className="group rounded-xl border border-slate-200 bg-white p-8 hover:border-blue-500 hover:shadow-lg transition-all">
+              <div className="flex items-start justify-between gap-6">
+                <div>
+                  <div className="text-[10px] tracking-[0.3em] uppercase font-semibold text-blue-600">{p.tagline}</div>
+                  <h3 className="mt-2 text-2xl md:text-3xl font-black tracking-tight text-slate-900">{p.name}</h3>
+                  <p className="mt-4 text-sm text-slate-600 leading-relaxed max-w-md">{p.description}</p>
+                </div>
+                <div className="shrink-0 w-14 h-14 rounded-lg bg-blue-50 text-blue-700 font-black text-xl flex items-center justify-center">
+                  {p.name.charAt(0)}
+                </div>
+              </div>
             </div>
           ))}
         </div>
