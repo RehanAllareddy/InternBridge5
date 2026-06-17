@@ -46,9 +46,9 @@ export default function Partners() {
             <p className="mt-5 text-blue-50/90 text-[15px] leading-relaxed max-w-xl">
               Reach motivated, ambitious students nationwide. List opportunities, host featured programs, and shape the next generation of talent.
             </p>
-            <Link to="/about" className="mt-7 inline-flex items-center gap-2 bg-white text-slate-900 px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-50 transition-colors">
+            <a href="https://form.typeform.com/to/qzET9mgP" target="_blank" rel="noreferrer" className="mt-7 inline-flex items-center gap-2 bg-white text-slate-900 px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-50 transition-colors">
               Get In Touch <ArrowRight className="w-4 h-4" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>
