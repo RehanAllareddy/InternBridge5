@@ -1,0 +1,25 @@
+.App {
+  background: #ffffff;
+}
+
+html, body {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.font-display {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-variation-settings: 'wght' 900;
+  letter-spacing: -0.04em;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom selection */
+::selection {
+  background: #2563eb;
+  color: white;
+}
