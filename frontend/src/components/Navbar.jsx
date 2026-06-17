@@ -7,6 +7,7 @@ const LOGO_URL = 'https://customer-assets.emergentagent.com/job_bridge-internshi
 const NAV = [
   { to: '/', label: 'Home' },
   { to: '/internships', label: 'Explore' },
+  { to: '/match', label: 'Match' },
   { to: '/partners', label: 'Partners' },
   { to: '/about', label: 'About' },
 ];

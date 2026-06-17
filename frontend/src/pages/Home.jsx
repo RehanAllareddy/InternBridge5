@@ -27,6 +27,9 @@ export default function Home() {
               <Link to="/internships" className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-600 transition-colors">
                 Explore Internships <ArrowRight className="w-4 h-4" />
               </Link>
+              <Link to="/match" className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-700 transition-colors">
+                Find My Match
+              </Link>
               <Link to="/about" className="inline-flex items-center gap-2 border border-slate-300 text-slate-900 px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:border-slate-900 transition-colors">
                 Learn More
               </Link>
@@ -64,10 +67,10 @@ export default function Home() {
             { v: `${STATS.opportunities}+`, l: 'Opportunities' },
             { v: `${STATS.fields}+`, l: 'Fields' },
             { v: `${STATS.locations}+`, l: 'Locations' },
-            { v: STATS.gradeLevel, l: 'Grade Level' },
+            { v: STATS.gradeLevel, l: 'Grade Level', small: true },
           ].map((s, i) => (
             <div key={i} className="text-center md:text-left">
-              <div className="text-5xl md:text-6xl font-black tracking-tight text-slate-900">{s.v}</div>
+              <div className={`font-black tracking-tight text-slate-900 ${s.small ? 'text-3xl md:text-4xl pt-3 md:pt-5' : 'text-5xl md:text-6xl'}`}>{s.v}</div>
               <div className="mt-2 text-[10px] tracking-[0.4em] uppercase text-slate-500">{s.l}</div>
             </div>
           ))}

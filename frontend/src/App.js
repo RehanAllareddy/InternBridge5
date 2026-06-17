@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Internships from './pages/Internships';
 import About from './pages/About';
 import Partners from './pages/Partners';
+import Survey from './pages/Survey';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/internships" element={<Internships />} />
             <Route path="/about" element={<About />} />
             <Route path="/partners" element={<Partners />} />
+            <Route path="/match" element={<Survey />} />
           </Routes>
         </main>
         <Footer />

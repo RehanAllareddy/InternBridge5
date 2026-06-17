@@ -4,7 +4,7 @@ export const STATS = {
   opportunities: 220,
   fields: 83,
   locations: 42,
-  gradeLevel: 'HS',
+  gradeLevel: 'HS + College',
 };
 
 export const IMPACT = [
