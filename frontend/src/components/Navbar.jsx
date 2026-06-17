@@ -10,7 +10,6 @@ const NAV = [
   { to: '/match', label: 'Match' },
   { to: '/partners', label: 'Partners' },
   { to: '/about', label: 'About' },
-  { to: '/admin', label: 'Admin' },
 ];
 
 export default function Navbar() {

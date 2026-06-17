@@ -38,7 +38,12 @@ Return ONLY valid JSON in this exact shape (no markdown, no commentary):
 
 Rules:
 - field MUST be one of: STEM, Law, Design, Business, AI, Medicine, Arts, Engineering, CS, Science, Research, Tech, Finance, Healthcare, Policy, Journalism, Environment, Education, Community Service, Leadership/Business
-- title: official short name of the program
+- title MUST start with the hosting university, lab, company, or organization name, followed by the program name. Examples:
+  * GOOD: "Stanford Pre-Collegiate Studies", "MIT Beaver Works Summer Institute", "Goldman Sachs Insight Series", "Texas Tech Research Apprenticeship", "Bank of America Student Leaders"
+  * BAD: "Summer High School Internship", "Research Program for HS Students", "Internship Programs", "Current Opportunities"
+- If the search result mentions a university or organization (Harvard, NIH, NASA, JPL, Texas A&M, etc.), the title MUST include that name first.
+- If you cannot determine which specific organization runs the program, SKIP it entirely. Do not include generic-titled programs.
+- Each title must be unique and identifiable — no two titles should be confusable.
 - location: short, e.g., "MA", "CA", "Virtual", "U.S.", "DC", "NY"
 - deadline: month abbreviation (Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec) OR "Rolling"
 - grade: "HS", "College", "HS+College", "11-12", "HS seniors" etc.

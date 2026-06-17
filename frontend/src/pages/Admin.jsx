@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { RefreshCw, Sparkles, Clock, CheckCircle2, AlertCircle, Loader2, ArrowUpRight, Database } from 'lucide-react';
+import { RefreshCw, Sparkles, Clock, CheckCircle2, AlertCircle, Loader2, ArrowUpRight, Database, Lock, LogOut } from 'lucide-react';
 import { triggerScrape, fetchScrapeStatus, fetchStats, fetchRecentInternships } from '../lib/api';
+
+const ADMIN_PASSCODE = 'RehanBridge2026';
+const AUTH_KEY = 'ib_admin_auth_v1';
 
 function fmtDate(iso) {
   if (!iso) return '—';
@@ -23,7 +26,50 @@ function relTime(iso) {
   return `${Math.floor(diff/86400)}d ago`;
 }
 
+function Gate({ onUnlock }) {
+  const [code, setCode] = useState('');
+  const [error, setError] = useState('');
+  const submit = (e) => {
+    e.preventDefault();
+    if (code.trim() === ADMIN_PASSCODE) {
+      localStorage.setItem(AUTH_KEY, '1');
+      onUnlock();
+    } else {
+      setError('Incorrect code.');
+    }
+  };
+  return (
+    <div className="bg-white text-slate-900 min-h-[70vh] flex items-center">
+      <div className="max-w-md w-full mx-auto px-6">
+        <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4 inline-flex items-center gap-2">
+          <Lock className="w-3 h-3 text-blue-600" /> Restricted
+        </div>
+        <h1 className="font-black uppercase tracking-tight leading-[0.9] text-5xl md:text-6xl">
+          <span className="block text-slate-900">Admin</span>
+          <span className="block text-blue-600">Access.</span>
+        </h1>
+        <p className="mt-5 text-slate-600 text-sm">Enter the admin code to access the scraper console.</p>
+        <form onSubmit={submit} className="mt-8 space-y-4">
+          <input
+            type="password"
+            value={code}
+            onChange={(e) => { setCode(e.target.value); setError(''); }}
+            placeholder="Admin code"
+            autoFocus
+            className="w-full px-4 py-3 rounded-md border border-slate-200 focus:border-slate-900 focus:outline-none text-sm"
+          />
+          {error && <div className="text-sm text-rose-600">{error}</div>}
+          <button type="submit" className="w-full inline-flex items-center justify-center gap-2 bg-slate-900 text-white px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-600 transition-colors">
+            Unlock
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 export default function Admin() {
+  const [authed, setAuthed] = useState(() => typeof window !== 'undefined' && localStorage.getItem(AUTH_KEY) === '1');
   const [runs, setRuns] = useState([]);
   const [stats, setStats] = useState(null);
   const [recent, setRecent] = useState([]);
@@ -51,10 +97,11 @@ export default function Admin() {
   };
 
   useEffect(() => {
+    if (!authed) return;
     refresh();
     const t = setInterval(refresh, 5000);
     return () => clearInterval(t);
-  }, []);
+  }, [authed]);
 
   const handleScrape = async () => {
     setMessage('');
@@ -68,19 +115,35 @@ export default function Admin() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem(AUTH_KEY);
+    setAuthed(false);
+  };
+
+  if (!authed) {
+    return <Gate onUnlock={() => setAuthed(true)} />;
+  }
+
   return (
     <div className="bg-white text-slate-900">
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-10">
-        <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4 inline-flex items-center gap-2">
-          <Sparkles className="w-3 h-3 text-blue-600" /> Admin Console
+        <div className="flex items-start justify-between gap-6 flex-wrap">
+          <div>
+            <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4 inline-flex items-center gap-2">
+              <Sparkles className="w-3 h-3 text-blue-600" /> Admin Console
+            </div>
+            <h1 className="font-black uppercase tracking-tight leading-[0.9] text-[clamp(40px,7vw,88px)]">
+              <span className="block text-slate-900">AI</span>
+              <span className="block text-blue-600">Scraper.</span>
+            </h1>
+            <p className="mt-6 max-w-2xl text-slate-600">
+              The scraper auto-runs every 6 hours. It uses Tavily web search + an LLM to discover new high school and college internship opportunities, then dedupes and stores them in MongoDB.
+            </p>
+          </div>
+          <button onClick={handleLogout} className="inline-flex items-center gap-2 border border-slate-300 text-slate-700 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase rounded hover:border-slate-900 hover:text-slate-900 transition-colors">
+            <LogOut className="w-3.5 h-3.5" /> Lock
+          </button>
         </div>
-        <h1 className="font-black uppercase tracking-tight leading-[0.9] text-[clamp(40px,7vw,88px)]">
-          <span className="block text-slate-900">AI</span>
-          <span className="block text-blue-600">Scraper.</span>
-        </h1>
-        <p className="mt-6 max-w-2xl text-slate-600">
-          The scraper auto-runs every 6 hours. It uses Tavily web search + an LLM to discover new high school and college internship opportunities, then dedupes and stores them in MongoDB.
-        </p>
       </section>
 
       {/* Stats grid */}
