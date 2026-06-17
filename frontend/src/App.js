@@ -8,7 +8,6 @@ import Internships from './pages/Internships';
 import About from './pages/About';
 import Partners from './pages/Partners';
 import Survey from './pages/Survey';
-import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -22,7 +21,6 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/match" element={<Survey />} />
-            <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
         <Footer />

@@ -1,8 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Check, RefreshCw, Sparkles } from 'lucide-react';
-import { FIELD_TAGS } from '../data/mock';
-import { useInternships } from '../hooks/useInternships';
+import { INTERNSHIPS, FIELD_TAGS } from '../data/mock';
 
 const GRADES = [
   { id: 'HS', label: 'High School' },
@@ -44,7 +43,6 @@ function scoreInternship(i, prefs) {
 }
 
 export default function Survey() {
-  const { data: INTERNSHIPS } = useInternships();
   const [step, setStep] = useState(1);
   const [interests, setInterests] = useState([]);
   const [grade, setGrade] = useState('');
@@ -62,7 +60,7 @@ export default function Survey() {
     const scored = INTERNSHIPS.map(i => ({ ...i, _score: scoreInternship(i, prefs) }));
     scored.sort((a, b) => b._score - a._score);
     return scored.slice(0, 12);
-  }, [submitted, interests, grade, location, timing, INTERNSHIPS]);
+  }, [submitted, interests, grade, location, timing]);
 
   const reset = () => {
     setInterests([]); setGrade(''); setLocation(''); setTiming('');

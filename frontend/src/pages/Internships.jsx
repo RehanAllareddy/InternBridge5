@@ -1,8 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Search, ArrowUpRight, Filter, X } from 'lucide-react';
-import { FIELD_TAGS } from '../data/mock';
-import { useInternships } from '../hooks/useInternships';
+import { INTERNSHIPS, FIELD_TAGS } from '../data/mock';
 
 export default function Internships() {
   const [params, setParams] = useSearchParams();
@@ -10,7 +9,6 @@ export default function Internships() {
   const [field, setField] = useState(initialField);
   const [query, setQuery] = useState('');
   const [location, setLocation] = useState('');
-  const { data: INTERNSHIPS, loading } = useInternships();
 
   useEffect(() => { setField(params.get('field') || ''); }, [params]);
 
@@ -21,9 +19,9 @@ export default function Internships() {
       const okLoc = !location || i.location.toLowerCase().includes(location.toLowerCase());
       return okField && okQuery && okLoc;
     });
-  }, [field, query, location, INTERNSHIPS]);
+  }, [field, query, location]);
 
-  const locations = useMemo(() => Array.from(new Set(INTERNSHIPS.map(i => i.location))).sort(), [INTERNSHIPS]);
+  const locations = useMemo(() => Array.from(new Set(INTERNSHIPS.map(i => i.location))).sort(), []);
 
   const setFieldParam = (f) => {
     if (f) params.set('field', f); else params.delete('field');
@@ -39,7 +37,7 @@ export default function Internships() {
           High School <span className="text-blue-600">Internships</span>
         </h1>
         <p className="mt-6 max-w-2xl text-slate-600">Discover amazing internship opportunities across STEM, law, arts, business, and more.</p>
-        <div className="mt-3 text-sm font-mono text-slate-500">{loading ? 'Loading…' : `${filtered.length} of ${INTERNSHIPS.length} opportunities`}</div>
+        <div className="mt-3 text-sm font-mono text-slate-500">{filtered.length} of {INTERNSHIPS.length} opportunities</div>
       </section>
 
       {/* Filters */}
@@ -91,12 +89,7 @@ export default function Internships() {
               <a key={i.id || idx} href={i.url} target="_blank" rel="noreferrer" className="group rounded-xl border border-slate-200 bg-white p-6 hover:border-blue-500 hover:shadow-lg transition-all">
                 <div className="flex items-start justify-between">
                   <div className="text-[10px] tracking-[0.3em] uppercase font-semibold text-blue-600">{i.field}</div>
-                  <div className="flex items-center gap-2">
-                    {i.source === 'scraper' && (
-                      <span className="text-[9px] tracking-[0.2em] uppercase font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">New</span>
-                    )}
-                    <ArrowUpRight className="w-4 h-4 text-slate-300 group-hover:text-blue-600 transition-colors" />
-                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-slate-300 group-hover:text-blue-600 transition-colors" />
                 </div>
                 <div className="mt-3 text-lg font-bold text-slate-900 group-hover:text-blue-600">{i.title}</div>
                 <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-mono text-slate-500">
