@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { STATS, FIELD_TAGS, LATEST_PLACEMENTS, FEATURED } from '../data/mock';
+import { STATS, FIELD_TAGS, LATEST_PLACEMENTS, FEATURED, IMPACT } from '../data/mock';
 
 export default function Home() {
   return (
@@ -39,15 +39,8 @@ export default function Home() {
               ))}
             </div>
           </div>
-          {/* Right - Logo + Latest Placements */}
+          {/* Right - Latest Placements */}
           <div className="lg:pl-8">
-            <div className="flex justify-center lg:justify-end mb-10">
-              <img
-                src="https://customer-assets.emergentagent.com/job_bridge-internships/artifacts/s66q0dn8_768da46f-eeb4-4784-a15e-97681d97e863.png"
-                alt="InternBridge"
-                className="w-56 md:w-64 h-auto object-contain"
-              />
-            </div>
             <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-6">Latest Placements</div>
             <ul className="space-y-1">
               {LATEST_PLACEMENTS.map((p, i) => (
@@ -78,6 +71,31 @@ export default function Home() {
               <div className="mt-2 text-[10px] tracking-[0.4em] uppercase text-slate-500">{s.l}</div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* IMPACT */}
+      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+          <div className="lg:col-span-1">
+            <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4">Our Impact</div>
+            <h2 className="font-black uppercase leading-[0.95] tracking-tight text-[clamp(36px,5vw,64px)] text-slate-900">
+              Real <span className="text-blue-600">Reach.</span>
+              <br/>Real Results.
+            </h2>
+            <p className="mt-5 text-slate-600 text-[15px] leading-relaxed max-w-md">
+              We&apos;re not just a directory. We&apos;ve actively shaped student journeys, built a growing community, and collaborated with peers from top universities to surface the right opportunities.
+            </p>
+          </div>
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {IMPACT.map((s, i) => (
+              <div key={i} className="rounded-xl border border-slate-200 bg-white p-7 hover:border-blue-500 hover:shadow-lg transition-all">
+                <div className="text-4xl md:text-5xl font-black tracking-tight text-slate-900">{s.value}</div>
+                <div className="mt-3 text-[10px] tracking-[0.3em] uppercase font-semibold text-blue-600">{s.label}</div>
+                <p className="mt-3 text-sm text-slate-600 leading-relaxed">{s.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

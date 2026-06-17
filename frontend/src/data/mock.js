@@ -1,11 +1,18 @@
 // Mock data for InternBridge clone
 
 export const STATS = {
-  opportunities: 229,
+  opportunities: 220,
   fields: 83,
   locations: 42,
   gradeLevel: 'HS',
 };
+
+export const IMPACT = [
+  { value: '200+', label: 'People Impacted', desc: 'Students whose career journeys we have personally shaped' },
+  { value: '2,500+', label: 'Post Impressions', desc: 'Reach across our content and social platforms' },
+  { value: 'Top Tier', label: 'University Network', desc: 'Collaborations with peers from leading universities' },
+  { value: '250+', label: 'Curated Placements', desc: 'Students matched with internships based on their interests' },
+];
 
 export const FIELD_TAGS = [
   'STEM','Law','Design','Business','AI','Medicine','Arts','Engineering','CS','Science','Research','Tech','Finance','Healthcare','Policy','Journalism','Environment','Education','Community Service','Leadership/Business'
