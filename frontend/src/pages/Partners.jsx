@@ -39,6 +39,20 @@ export default function Partners() {
         </p>
       </section>
 
+      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-16">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0b3aa8] via-[#1452d9] to-[#2b8bff] text-white p-10 md:p-14">
+          <div className="relative max-w-2xl">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">Partner with InternBridge</h2>
+            <p className="mt-5 text-blue-50/90 text-[15px] leading-relaxed max-w-xl">
+              Reach motivated, ambitious students nationwide. List opportunities, host featured programs, and shape the next generation of talent.
+            </p>
+            <Link to="/about" className="mt-7 inline-flex items-center gap-2 bg-white text-slate-900 px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-50 transition-colors">
+              Get In Touch <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-20">
         <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-6">Our Partners</div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -74,20 +88,6 @@ export default function Partners() {
               <p className="mt-3 text-sm text-slate-600 leading-relaxed">{d}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0b3aa8] via-[#1452d9] to-[#2b8bff] text-white p-10 md:p-14">
-          <div className="relative max-w-2xl">
-            <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">Partner with InternBridge</h2>
-            <p className="mt-5 text-blue-50/90 text-[15px] leading-relaxed max-w-xl">
-              Reach motivated, ambitious students nationwide. List opportunities, host featured programs, and shape the next generation of talent.
-            </p>
-            <Link to="/about" className="mt-7 inline-flex items-center gap-2 bg-white text-slate-900 px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-50 transition-colors">
-              Get In Touch <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
       </section>
     </div>
