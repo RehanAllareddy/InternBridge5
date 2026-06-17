@@ -2,8 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { STATS, FIELD_TAGS, LATEST_PLACEMENTS, FEATURED, IMPACT } from '../data/mock';
+import { useStats } from '../hooks/useInternships';
 
 export default function Home() {
+  const liveStats = useStats();
+  const total = liveStats?.total || STATS.opportunities;
+  const fields = liveStats?.fields || STATS.fields;
+  const locations = liveStats?.locations || STATS.locations;
   return (
     <div className="bg-white text-slate-900">
       {/* HERO */}
@@ -13,7 +18,7 @@ export default function Home() {
           <div>
             <div className="inline-flex items-center gap-2 text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-8">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
-              {STATS.opportunities}+ Opportunities Live
+              {total}+ Opportunities Live
             </div>
             <h1 className="font-display font-black uppercase leading-[0.9] tracking-tight text-[clamp(48px,7vw,104px)]">
               <span className="block text-slate-900">Bridge</span>
@@ -64,9 +69,9 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-b border-slate-200 py-12">
           {[
-            { v: `${STATS.opportunities}+`, l: 'Opportunities' },
-            { v: `${STATS.fields}+`, l: 'Fields' },
-            { v: `${STATS.locations}+`, l: 'Locations' },
+            { v: `${total}+`, l: 'Opportunities' },
+            { v: `${fields}+`, l: 'Fields' },
+            { v: `${locations}+`, l: 'Locations' },
             { v: STATS.gradeLevel, l: 'Grade Level', small: true },
           ].map((s, i) => (
             <div key={i} className="text-center md:text-left">

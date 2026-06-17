@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { STATS } from '../data/mock';
+import { fetchStats } from '../lib/api';
 
 const LOGO_URL = 'https://customer-assets.emergentagent.com/job_bridge-internships/artifacts/s66q0dn8_768da46f-eeb4-4784-a15e-97681d97e863.png';
 
 export default function Footer() {
+  const [total, setTotal] = useState(STATS.opportunities);
+  useEffect(() => {
+    let mounted = true;
+    fetchStats().then(s => { if (mounted && s?.total) setTotal(s.total); }).catch(() => {});
+    return () => { mounted = false; };
+  }, []);
   return (
     <footer className="bg-[#0b1326] text-slate-300 mt-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-10">
@@ -42,7 +49,7 @@ export default function Footer() {
         </div>
         <div className="flex flex-col md:flex-row items-center justify-between pt-6 text-xs text-slate-500">
           <div>© 2026 InternBridge. All rights reserved.</div>
-          <div>{STATS.opportunities}+ Opportunities Live</div>
+          <div>{total}+ Opportunities Live</div>
         </div>
       </div>
     </footer>

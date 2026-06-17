@@ -101,3 +101,168 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Test the InternBridge backend API which has just been added with an AI scraper"
+
+backend:
+  - task: "Health Check API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "GET /api/ returns correct response: {'message': 'InternBridge API', 'status': 'ok'}"
+
+  - task: "Get Internships API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "GET /api/internships returns 222 seeded internships with correct structure (id, field, title, location, deadline, grade, url, source). All seeded items have source='seed'"
+
+  - task: "Get Internships Stats API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "GET /api/internships/stats returns correct stats: total=222, fields=20, locations=31, last_scrape=None (before first scrape), last_scrape_added=0"
+
+  - task: "Trigger Scrape API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "POST /api/admin/scrape successfully triggers background scrape. Returns 200 with message 'Scrape started in background' and ISO timestamp"
+
+  - task: "Scrape Status API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "GET /api/admin/scrape/status returns scrape runs. Polled for 30s until status changed from 'running' to 'completed'. Completed run has: queries_searched=10, candidates_found=31, new_added=29, duration_seconds=29.42"
+
+  - task: "Stats After Scrape Verification"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "After scrape completion, GET /api/internships/stats correctly shows total=251 (222+29), fields=20, locations=35, last_scrape='2026-06-17T17:17:06.592000', last_scrape_added=29"
+
+  - task: "Get Recent Internships API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "GET /api/internships/recent?limit=10 returns 10 recently scraped internships. All have source='scraper'"
+
+  - task: "Tavily API Integration"
+    implemented: true
+    working: true
+    file: "/app/backend/scraper.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Tavily API integration working correctly. TAVILY_API_KEY configured in .env. Scraper successfully searched 10 queries and found 31 candidates"
+
+  - task: "Emergent LLM Integration"
+    implemented: true
+    working: true
+    file: "/app/backend/scraper.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Emergent LLM (gpt-5.4-mini) integration working correctly. EMERGENT_LLM_KEY configured in .env. LLM successfully extracted 29 valid internships from 31 candidates. Backend logs show successful LLM completion calls with no errors"
+
+  - task: "Database Seeding"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Database seeding working correctly. 222 internships seeded on startup. Seed is idempotent (skips if data already exists)"
+
+  - task: "Scraper Deduplication"
+    implemented: true
+    working: true
+    file: "/app/backend/scraper.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Scraper deduplication working correctly. Found 31 candidates, added 29 new internships (2 were duplicates). Deduplication based on title and url"
+
+frontend:
+  - task: "Frontend Testing"
+    implemented: false
+    working: "NA"
+    file: ""
+    stuck_count: 0
+    priority: "low"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Frontend testing not performed as per system instructions (testing agent only tests backend)"
+
+metadata:
+  created_by: "testing_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "All backend API endpoints tested and verified"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "testing"
+    message: "Completed comprehensive backend API testing for InternBridge. All 7 API endpoints tested successfully. AI scraper integration verified with Tavily API and Emergent LLM. Scraper successfully added 29 new internships from 31 candidates in ~29 seconds. All tests passed (7/7). Backend is fully functional and ready for production."
