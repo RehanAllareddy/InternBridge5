@@ -3,30 +3,30 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Handshake, Sparkles, Network } from 'lucide-react';
 
 const PARTNERS = [
-  {
-    name: 'CAIVO',
-    tagline: 'Innovation & Technology',
-    description: 'Tech-driven partner empowering students with hands-on engineering and product experience.',
-    image: '/charlotte_ai_vanguard_organization_logo.jpg',
-  },
-  {
-    name: 'CYMA',
-    tagline: 'Career Mentorship',
-    description: 'A featured collaborator providing real-world internship pathways and mentorship for ambitious students.',
-    image: '/1722077578724.jpeg',
-  },
-  {
-    name: 'YRI Fellowship',
-    tagline: 'Youth Research Initiative',
-    description: 'Selective research fellowship connecting high school students with leading academic researchers.',
-    image: '/1757383361622.jpeg',
-  },
-  {
-    name: 'ViraHacks',
-    tagline: 'Hackathons & Builder Community',
-    description: 'Premier student-run hackathon series turning curious students into builders and founders.',
-    image: '/image-2.jpg',
-  },
+ {
+  name: "CAIVO",
+  tagline: "Innovation & Technology",
+  description: "Tech-driven partner empowering students with hands-on engineering and product experience.",
+  image: "/downloads/charlotte_ai_vanguard_organization_logo.jpg",
+},
+{
+  name: "CYMA",
+  tagline: "Career Mentorship",
+  description: "A featured collaborator providing real-world internship pathways and mentorship for ambitious students.",
+  image: "/downloads/1722077578724.jpeg",
+},
+{
+  name: "YRI Fellowship",
+  tagline: "Youth Research Initiative",
+  description: "Selective research fellowship connecting high school students with leading academic researchers.",
+  image: "/downloads/1757383361622.jpeg",
+},
+{
+  name: "ViraHacks",
+  tagline: "Hackathons & Builder Community",
+  description: "Premier student-run hackathon series turning curious students into builders and founders.",
+  image: "/downloads/1766546447445.jpeg",
+},
 ];
 
 export default function Partners() {

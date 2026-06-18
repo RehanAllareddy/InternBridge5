@@ -17,7 +17,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-slate-400 max-w-xs">
-              Bridging the gap between academic potential and professional opportunity. Built for high school students ready to make an impact.
+              Bridging the gap between academic potential and professional opportunity. Built for high schoola and college students ready to make an impact.
             </p>
           </div>
           <div>
