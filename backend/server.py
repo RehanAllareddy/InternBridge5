@@ -92,15 +92,19 @@ def _doc_to_internship(doc) -> dict:
 
 
 async def seed_database_if_empty():
-    count = await db.internships.count_documents({})
-    if count == 0:
-        seeds = get_seed_internships()
-        for s in seeds:
+    seeds = get_seed_internships()
+    inserted = 0
+    for s in seeds:
+        existing = await db.internships.find_one({'title': s['title']})
+        if not existing:
             s['created_at'] = datetime.now(timezone.utc)
-        await db.internships.insert_many(seeds)
-        logger.info(f"Seeded {len(seeds)} internships into MongoDB.")
+            await db.internships.insert_one(s)
+            inserted += 1
+    count = await db.internships.count_documents({})
+    if inserted:
+        logger.info(f"Inserted {inserted} new seed internships. Collection now has {count} documents.")
     else:
-        logger.info(f"Internships collection already has {count} documents — skipping seed.")
+        logger.info(f"Internships collection already up to date with {count} documents.")
 
 
 # =================== ROUTES ===================
