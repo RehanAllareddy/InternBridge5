@@ -19,7 +19,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 backdrop-blur bg-white/80 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <img src={LOGO_URL} alt="InternBridge" className="h-9 w-auto object-contain" />
+          <img src={LOGO_URL} alt="InternBridge" className="h-14 w-auto object-contain" />
         </Link>
         <nav className="hidden md:flex items-center gap-1">
           {NAV.map(n => (
