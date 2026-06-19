@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Handshake, Sparkles, Network } from 'lucide-react';
-import caivoLogo from "./assets/charlotte_ai_vanguard_organization_logo.jpeg";
-import cymaLogo from "./assets/1722077578724.jpeg";
-import yriLogo from "./assets/1757383361622.jpeg";
-import viraLogo from "./assets/1766546447445.jpeg";
+import caivoLogo from "../assets/images/charlotte_ai_vanguard_organization_logo.jpeg";
+import cymaLogo from "../assets/images/1722077578724.jpeg";
+import yriLogo from "../assets/images/1757383361622.jpeg";
+import viraLogo from "../assets/images/1766546447445.jpeg";
 
 const PARTNERS = [
   {
@@ -72,8 +72,8 @@ export default function Partners() {
                   <h3 className="mt-2 text-2xl md:text-3xl font-black tracking-tight text-slate-900">{p.name}</h3>
                   <p className="mt-4 text-sm text-slate-600 leading-relaxed max-w-md">{p.description}</p>
                 </div>
-                <div className="shrink-0 w-14 h-14 rounded-lg bg-blue-50 text-blue-700 font-black text-xl flex items-center justify-center">
-                  {p.name.charAt(0)}
+                <div className="shrink-0 w-14 h-14 rounded-lg bg-blue-50 overflow-hidden flex items-center justify-center">
+                  <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
                 </div>
               </div>
             </div>
