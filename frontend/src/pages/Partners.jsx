@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Handshake, Sparkles, Network } from 'lucide-react';
-import caivoLogo from "./assets/charlotte_ai_vanguard_organization_logo.jpg";
+import caivoLogo from "./assets/charlotte_ai_vanguard_organization_logo.jpeg";
 import cymaLogo from "./assets/1722077578724.jpeg";
 import yriLogo from "./assets/1757383361622.jpeg";
 import viraLogo from "./assets/1766546447445.jpeg";
