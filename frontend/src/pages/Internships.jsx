@@ -34,7 +34,7 @@ export default function Internships() {
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-10">
         <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4">Catalog</div>
         <h1 className="font-black uppercase tracking-tight leading-[0.9] text-[clamp(48px,8vw,108px)] text-slate-900">
-          High School and College <span className="text-blue-600">Internships & Career Opportunities</span>
+          High School & College <span className="text-blue-600">Career Opportunities</span>
         </h1>
         <p className="mt-6 max-w-2xl text-slate-600">Discover amazing internship opportunities across STEM, law, arts, business, and more.</p>
         <div className="mt-3 text-sm font-mono text-slate-500">{filtered.length} of {INTERNSHIPS.length} opportunities</div>
