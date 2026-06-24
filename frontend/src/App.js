@@ -29,6 +29,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <Analytics />
         <Routes>
           {/* Login has its own full-screen layout — no Navbar/Footer */}
           <Route path="/login" element={<Login />} />
