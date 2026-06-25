@@ -66,7 +66,7 @@ export default function Home() {
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse 50% 60% at 85% 10%, rgba(99,102,241,0.12) 0%, transparent 65%)' }} />
 
-        <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-12 sm:pt-16 lg:pt-20 pb-20 sm:pb-24 lg:pb-28">
+        <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-20 lg:pb-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
             {/* Left */}
@@ -154,14 +154,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Smooth fade into page background */}
-        <div className="absolute bottom-0 left-0 right-0 h-52 pointer-events-none"
-          style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(248,250,252,0.15) 35%, rgba(248,250,252,0.7) 65%, #f8fafc 100%)' }} />
       </div>
 
-      {/* ── STATS ─────────────────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-16 lg:py-20">
-        <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white rounded-2xl border border-slate-200 shadow-sm px-6 sm:px-8 lg:px-12 py-8 sm:py-10 lg:py-12">
+      {/* ── STATS — floats over hero boundary ─────────────── */}
+      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 -mt-10 sm:-mt-14 pb-12 sm:pb-16 lg:pb-20">
+        <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white rounded-2xl border border-slate-200/60 shadow-xl shadow-slate-900/10 px-6 sm:px-8 lg:px-12 py-8 sm:py-10 lg:py-12">
           {[
             { v: `${STATS.opportunities}+`, l: 'Opportunities' },
             { v: `${STATS.fields}+`, l: 'Fields' },
