@@ -58,7 +58,7 @@ export default function Partners() {
       <PartnersSection compact={false} />
 
       {/* ── Why partner ───────────────────────────────────── */}
-      <section className="bg-white border-t border-slate-200 py-16 sm:py-20">
+      <section className="bg-[#f8fafc] border-t border-slate-200 py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
           <div className="text-[10px] tracking-[0.4em] uppercase text-slate-400 mb-4">Why Partner</div>
           <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 mb-10">What you get</h2>

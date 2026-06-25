@@ -197,7 +197,7 @@ export default function Home() {
       </section>
 
       {/* ── FEATURED ──────────────────────────────────────── */}
-      <section className="bg-white border-y border-slate-200 py-16 sm:py-20 lg:py-24">
+      <section className="bg-[#f8fafc] border-y border-slate-200 py-16 sm:py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
           <div className="flex items-end justify-between mb-8 sm:mb-10">
             <div>

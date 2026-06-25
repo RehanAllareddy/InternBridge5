@@ -5,6 +5,14 @@ import yriLogo from '../assets/images/1757383361622.jpeg';
 import cymaLogo from '../assets/images/1722077578724.jpeg';
 import caivoLogo from '../assets/images/charlotte_ai_vanguard_organization_logo.jpeg';
 import viraLogo from '../assets/images/1766546447445.jpeg';
+import empiricLogo from '../assets/images/empiric_logo.svg';
+import yelLogo from '../assets/images/yel_logo.png';
+import nyrjLogo from '../assets/images/nyrj_logo.png';
+import exovistaLogo from '../assets/images/exovista_logo.png';
+import nexoraLogo from '../assets/images/nexora_logo.svg';
+import ejsLogo from '../assets/images/ejs_logo.jpeg';
+import nsriLogo from '../assets/images/nsri_logo.jpeg';
+import wsoLogo from '../assets/images/wso_logo.jpeg';
 
 // ─── Single source of truth for all partners ───────────────────────────────
 export const PARTNERS = [
@@ -62,8 +70,8 @@ export const PARTNERS = [
     short: 'Empiric',
     tagline: 'Student Finance & Investing',
     description: 'Bringing data-driven investment education and finance exposure to the next generation of student investors.',
-    logo: null,
-    url: '#',
+    logo: empiricLogo,
+    url: 'https://empiricinvesting.me',
     initials: 'EI',
     gradient: 'from-amber-500 to-yellow-600',
     category: 'Finance',
@@ -74,8 +82,8 @@ export const PARTNERS = [
     short: 'YEL',
     tagline: 'Economics & Policy Research',
     description: 'Empowering young economists and policy thinkers to tackle real-world economic challenges through rigorous research.',
-    logo: null,
-    url: '#',
+    logo: yelLogo,
+    url: 'https://youtheconomylab.com',
     initials: 'YEL',
     gradient: 'from-orange-500 to-amber-600',
     category: 'Policy',
@@ -86,8 +94,8 @@ export const PARTNERS = [
     short: 'NYRJ',
     tagline: 'Academic Publishing',
     description: 'A peer-reviewed journal showcasing original research and academic writing from high-achieving student scholars.',
-    logo: null,
-    url: '#',
+    logo: nyrjLogo,
+    url: 'https://nyrj.org',
     initials: 'NYRJ',
     gradient: 'from-cyan-600 to-teal-700',
     category: 'Research',
@@ -98,7 +106,7 @@ export const PARTNERS = [
     short: "Explorer's Journal",
     tagline: 'Science & Discovery',
     description: 'Celebrating and publishing groundbreaking scientific inquiry and STEM research from student researchers nationwide.',
-    logo: null,
+    logo: ejsLogo,
     url: '#',
     initials: 'EJS',
     gradient: 'from-green-600 to-emerald-700',
@@ -110,8 +118,8 @@ export const PARTNERS = [
     short: 'Exovista',
     tagline: 'Space & Deep Tech',
     description: 'A student-led platform connecting aspiring engineers with space exploration programs and cutting-edge STEM opportunities.',
-    logo: null,
-    url: '#',
+    logo: exovistaLogo,
+    url: 'https://exovista.org',
     initials: 'EXO',
     gradient: 'from-indigo-700 to-blue-900',
     category: 'Technology',
@@ -122,8 +130,8 @@ export const PARTNERS = [
     short: 'NSRI',
     tagline: 'Research & Mentorship',
     description: 'Connecting motivated students with research mentors and leading academic institutions across the United States.',
-    logo: null,
-    url: '#',
+    logo: nsriLogo,
+    url: 'https://nsri.org',
     initials: 'NSRI',
     gradient: 'from-slate-500 to-slate-700',
     category: 'Research',
@@ -134,7 +142,7 @@ export const PARTNERS = [
     short: 'WSO',
     tagline: 'Finance Career Community',
     description: "The world's largest finance community, connecting students and professionals with Wall Street career resources and opportunities.",
-    logo: null,
+    logo: wsoLogo,
     url: 'https://www.wallstreetoasis.com',
     initials: 'WSO',
     gradient: 'from-amber-700 to-orange-800',
@@ -146,8 +154,8 @@ export const PARTNERS = [
     short: 'Nexora',
     tagline: 'Artificial Intelligence',
     description: 'Pioneering AI education and research pathways for the next generation of machine learning engineers and researchers.',
-    logo: null,
-    url: '#',
+    logo: nexoraLogo,
+    url: 'https://nexora-ai-saas-websi-dhrq.bolt.host',
     initials: 'NAI',
     gradient: 'from-blue-600 to-violet-700',
     category: 'Technology',
@@ -248,7 +256,7 @@ function FullPartnerCard({ partner }) {
 export default function PartnersSection({ compact = false }) {
   if (compact) {
     return (
-      <section className="bg-white border-y border-slate-200 py-14 sm:py-16">
+      <section className="bg-[#f8fafc] border-y border-slate-200 py-14 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>

@@ -72,7 +72,7 @@ export default function Survey() {
 
   if (submitted) {
     return (
-      <div className="bg-white text-slate-900">
+      <div className="bg-[#f8fafc] text-slate-900">
         <section className="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-10">
           <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4 inline-flex items-center gap-2">
             <Sparkles className="w-3 h-3 text-blue-600" /> Your Matches
@@ -128,7 +128,7 @@ export default function Survey() {
   }
 
   return (
-    <div className="bg-white text-slate-900">
+    <div className="bg-[#f8fafc] text-slate-900">
       <section className="max-w-4xl mx-auto px-6 lg:px-10 pt-16 pb-10">
         <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4 inline-flex items-center gap-2">
           <Sparkles className="w-3 h-3 text-blue-600" /> Find Your Match

@@ -51,7 +51,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-[#f8fafc] flex">
       {/* Left panel — branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-slate-950 flex-col justify-between p-14">
         <div>
