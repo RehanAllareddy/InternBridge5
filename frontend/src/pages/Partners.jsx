@@ -24,8 +24,8 @@ export default function Partners() {
             We collaborate with leading student organizations, research journals, and career networks to connect ambitious students with meaningful opportunities.
           </p>
         </section>
-        <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
-          style={{ background: 'linear-gradient(to bottom, transparent, #f8fafc)' }} />
+        <div className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(248,250,252,0.15) 35%, rgba(248,250,252,0.7) 65%, #f8fafc 100%)' }} />
       </div>
 
       {/* ── Partner with us CTA ───────────────────────────── */}

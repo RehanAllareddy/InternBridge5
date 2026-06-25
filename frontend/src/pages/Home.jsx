@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight, Lock } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { STATS, FIELD_TAGS, LATEST_PLACEMENTS, FEATURED, IMPACT } from '../data/mock';
 import PartnersSection from '../components/PartnersSection';
+import useInView from '../hooks/useInView';
 
 const FIELD_COLORS = {
   CS: 'bg-violet-500/20 text-violet-300 border-violet-500/30',
@@ -49,6 +50,10 @@ function LightFieldBadge({ field }) {
 
 export default function Home() {
   const { user } = useAuth();
+  const [statsRef, statsVis] = useInView({ threshold: 0.05 });
+  const [impactRef, impactVis] = useInView({ threshold: 0.05 });
+  const [featuredRef, featuredVis] = useInView({ threshold: 0.04 });
+  const [ctaRef, ctaVis] = useInView({ threshold: 0.1 });
 
   return (
     <div className="bg-[#f8fafc] text-slate-900">
@@ -149,21 +154,23 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Fade into off-white */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
-          style={{ background: 'linear-gradient(to bottom, transparent, #f8fafc)' }} />
+        {/* Smooth fade into page background */}
+        <div className="absolute bottom-0 left-0 right-0 h-52 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(248,250,252,0.15) 35%, rgba(248,250,252,0.7) 65%, #f8fafc 100%)' }} />
       </div>
 
       {/* ── STATS ─────────────────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-16 lg:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white rounded-2xl border border-slate-200 shadow-sm px-6 sm:px-8 lg:px-12 py-8 sm:py-10 lg:py-12">
+        <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white rounded-2xl border border-slate-200 shadow-sm px-6 sm:px-8 lg:px-12 py-8 sm:py-10 lg:py-12">
           {[
             { v: `${STATS.opportunities}+`, l: 'Opportunities' },
             { v: `${STATS.fields}+`, l: 'Fields' },
             { v: `${STATS.locations}+`, l: 'Locations' },
             { v: STATS.gradeLevel, l: 'Grade Level', small: true },
           ].map((s, i) => (
-            <div key={i} className="text-center md:text-left">
+            <div key={i}
+              className={`sr-item text-center md:text-left${statsVis ? ' sr-visible' : ''}`}
+              style={{ transitionDelay: `${i * 80}ms` }}>
               <div className={`font-black tracking-tight text-slate-900 ${s.small ? 'text-2xl sm:text-3xl md:text-4xl pt-1 sm:pt-3' : 'text-4xl sm:text-5xl md:text-6xl'}`}>{s.v}</div>
               <div className="mt-1.5 text-[9px] sm:text-[10px] tracking-[0.35em] uppercase text-slate-400">{s.l}</div>
             </div>
@@ -172,9 +179,9 @@ export default function Home() {
       </section>
 
       {/* ── IMPACT ────────────────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-20 lg:pb-24">
+      <section ref={impactRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-20 lg:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-start">
-          <div className="lg:col-span-1">
+          <div className={`sr-item lg:col-span-1${impactVis ? ' sr-visible' : ''}`}>
             <div className="text-[10px] tracking-[0.4em] uppercase text-slate-400 mb-4">Our Impact</div>
             <h2 className="font-black uppercase leading-[0.95] tracking-tight text-[clamp(32px,6vw,64px)] text-slate-900">
               Real <span className="text-blue-600">Reach.</span>
@@ -186,7 +193,9 @@ export default function Home() {
           </div>
           <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {IMPACT.map((s, i) => (
-              <div key={i} className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-7 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-50 transition-all">
+              <div key={i}
+                className={`sr-item rounded-2xl border border-slate-200 bg-white p-6 sm:p-7 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-50 transition-all${impactVis ? ' sr-visible' : ''}`}
+                style={{ transitionDelay: `${(i + 1) * 90}ms` }}>
                 <div className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900">{s.value}</div>
                 <div className="mt-3 text-[10px] tracking-[0.3em] uppercase font-semibold text-blue-600">{s.label}</div>
                 <p className="mt-3 text-sm text-slate-500 leading-relaxed">{s.desc}</p>
@@ -209,9 +218,11 @@ export default function Home() {
               View All <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div ref={featuredRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {FEATURED.map((f, i) => (
-              <div key={i} className="group rounded-2xl border border-slate-200 bg-[#f8fafc] p-5 sm:p-6 hover:border-blue-400 hover:bg-white hover:shadow-lg hover:shadow-blue-50/80 transition-all">
+              <div key={i}
+                className={`sr-item group rounded-2xl border border-slate-200 bg-[#f8fafc] p-5 sm:p-6 hover:border-blue-400 hover:bg-white hover:shadow-lg hover:shadow-blue-50/80 transition-all${featuredVis ? ' sr-visible' : ''}`}
+                style={{ transitionDelay: `${i * 75}ms` }}>
                 <LightFieldBadge field={f.field} />
                 <h3 className="mt-3 text-[14px] sm:text-[15px] font-bold text-slate-900 group-hover:text-blue-600 leading-snug transition-colors">{f.title}</h3>
                 <div className="mt-5 pt-4 border-t border-slate-200 flex items-center justify-between">
@@ -245,8 +256,8 @@ export default function Home() {
       <PartnersSection compact />
 
       {/* ── CTA ───────────────────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16 sm:py-20 lg:py-24">
-        <div className="relative rounded-2xl sm:rounded-3xl bg-slate-950 overflow-hidden px-6 sm:px-10 py-12 sm:py-14 lg:py-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+      <section ref={ctaRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16 sm:py-20 lg:py-24">
+        <div className={`sr-item relative rounded-2xl sm:rounded-3xl bg-slate-950 overflow-hidden px-6 sm:px-10 py-12 sm:py-14 lg:py-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8${ctaVis ? ' sr-visible' : ''}`}>
           <div className="absolute inset-0 bg-line-grid" />
           <div className="absolute inset-0 pointer-events-none"
             style={{ background: 'radial-gradient(ellipse 60% 80% at 5% 50%, rgba(37,99,235,0.2) 0%, transparent 65%)' }} />
