@@ -143,15 +143,15 @@ export default function Login() {
           )}
 
           <div className="mt-8 border-t border-slate-100 pt-8">
-            <div className="grid grid-cols-3 gap-4 text-center">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 text-center">
               {[
                 { v: `${STATS.opportunities}+`, l: 'Listings' },
                 { v: `${STATS.fields}+`, l: 'Fields' },
-                { v: 'HS + College', l: 'Grade Levels' },
+                { v: 'HS+', l: 'Grade Levels' },
               ].map((s, i) => (
                 <div key={i}>
-                  <div className="text-xl font-black text-slate-900">{s.v}</div>
-                  <div className="mt-0.5 text-[10px] tracking-[0.3em] uppercase text-slate-500">{s.l}</div>
+                  <div className="text-lg sm:text-xl font-black text-slate-900">{s.v}</div>
+                  <div className="mt-0.5 text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-slate-500">{s.l}</div>
                 </div>
               ))}
             </div>

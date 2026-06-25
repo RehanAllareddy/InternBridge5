@@ -6,41 +6,48 @@ const LOGO_URL = 'https://customer-assets.emergentagent.com/job_bridge-internshi
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0b1326] text-slate-300 mt-24">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-10">
-        <div className="text-center text-[11px] tracking-[0.4em] uppercase text-slate-500 mb-16">Global Internship Pulse</div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-slate-800">
-          <div>
-            <Link to="/" className="flex items-center gap-2">
+    <footer className="bg-[#0b1326] text-slate-300 mt-16 sm:mt-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-14 sm:pt-20 pb-8 sm:pb-10">
+        <div className="text-center text-[11px] tracking-[0.4em] uppercase text-slate-600 mb-10 sm:mb-16">Global Internship Pulse</div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-slate-800">
+          {/* Brand */}
+          <div className="col-span-2 sm:col-span-1">
+            <Link to="/" className="inline-flex items-center">
               <div className="bg-white rounded-md p-1.5 inline-flex">
-                <img src={LOGO_URL} alt="InternBridge" className="h-9 w-auto object-contain" />
+                <img src={LOGO_URL} alt="InternBridge" className="h-8 sm:h-9 w-auto object-contain" />
               </div>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-slate-400 max-w-xs">
-              Bridging the gap between academic potential and professional opportunity. Built for high schoola and college students ready to make an impact.
+              Bridging the gap between academic potential and professional opportunity. Built for high school and college students ready to make an impact.
             </p>
           </div>
+
+          {/* Navigate */}
           <div>
             <div className="text-[11px] tracking-[0.3em] uppercase text-slate-500 mb-4">Navigate</div>
-            <ul className="space-y-2 text-sm">
-              <li><Link to="/" className="hover:text-white">Home</Link></li>
-              <li><Link to="/internships" className="hover:text-white">Explore</Link></li>
-              <li><Link to="/partners" className="hover:text-white">Partners</Link></li>
-              <li><Link to="/about" className="hover:text-white">About</Link></li>
+            <ul className="space-y-2.5 text-sm">
+              <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link to="/internships" className="hover:text-white transition-colors">Explore</Link></li>
+              <li><Link to="/partners" className="hover:text-white transition-colors">Partners</Link></li>
+              <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
             </ul>
           </div>
+
+          {/* Top Fields */}
           <div>
             <div className="text-[11px] tracking-[0.3em] uppercase text-slate-500 mb-4">Top Fields</div>
-            <ul className="space-y-2 text-sm">
-              <li><Link to="/internships?field=STEM" className="hover:text-white">STEM</Link></li>
-              <li><Link to="/internships?field=Business" className="hover:text-white">Business</Link></li>
-              <li><Link to="/internships?field=Medicine" className="hover:text-white">Medicine</Link></li>
-              <li><Link to="/internships?field=Engineering" className="hover:text-white">Engineering</Link></li>
-              <li><Link to="/internships?field=Design" className="hover:text-white">Design</Link></li>
+            <ul className="space-y-2.5 text-sm">
+              <li><Link to="/internships?field=STEM" className="hover:text-white transition-colors">STEM</Link></li>
+              <li><Link to="/internships?field=Business" className="hover:text-white transition-colors">Business</Link></li>
+              <li><Link to="/internships?field=Medicine" className="hover:text-white transition-colors">Medicine</Link></li>
+              <li><Link to="/internships?field=Engineering" className="hover:text-white transition-colors">Engineering</Link></li>
+              <li><Link to="/internships?field=Design" className="hover:text-white transition-colors">Design</Link></li>
             </ul>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-between pt-6 text-xs text-slate-500">
+
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 text-xs text-slate-600">
           <div>© 2026 InternBridge. All rights reserved.</div>
           <div>{STATS.opportunities}+ Opportunities Live</div>
         </div>

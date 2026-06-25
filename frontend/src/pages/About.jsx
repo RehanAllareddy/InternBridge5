@@ -5,9 +5,9 @@ import { STATS } from '../data/mock';
 
 export default function About() {
   return (
-    <div className="bg-white text-slate-900">
+    <div className="bg-[#f8fafc] text-slate-900">
       {/* Hero */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-20">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-12 sm:pt-16 pb-16 sm:pb-20">
         <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4">About Us</div>
         <h1 className="font-black uppercase tracking-tight leading-[0.9] text-[clamp(48px,8vw,108px)]">
           <span className="block text-slate-900">Bridging Students</span>
@@ -19,7 +19,7 @@ export default function About() {
       </section>
 
       {/* 3 Pillars */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {[
             { Icon: ShieldCheck, t: 'Curated Quality', d: 'Every opportunity is hand-picked and verified, ensuring students access only the best internships.' },
@@ -38,7 +38,7 @@ export default function About() {
       </section>
 
       {/* Mission */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start border-t border-slate-200 pt-16">
           <div>
             <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4">Our Mission</div>
@@ -58,7 +58,7 @@ export default function About() {
       </section>
 
       {/* Values */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24">
         <h2 className="text-2xl md:text-3xl font-black tracking-tight mb-10 text-slate-900">What We Stand For</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
@@ -76,7 +76,7 @@ export default function About() {
       </section>
 
       {/* Stats */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-b border-slate-200 py-12">
           {[
             { v: `${STATS.opportunities}+`, l: 'Opportunities' },
@@ -93,11 +93,11 @@ export default function About() {
       </section>
 
       {/* Founder */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-28">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-28">
         <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4">Meet The Founder</div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-start">
           <div className="lg:col-span-1">
-            <div className="aspect-square w-full max-w-sm rounded-2xl bg-gradient-to-br from-slate-900 via-[#0b1326] to-blue-700 flex items-center justify-center text-white shadow-xl">
+            <div className="aspect-square w-full max-w-[220px] sm:max-w-sm mx-auto lg:mx-0 rounded-2xl bg-gradient-to-br from-slate-900 via-[#0b1326] to-blue-700 flex items-center justify-center text-white shadow-xl">
               <div className="text-center px-6">
                 <div className="font-black text-7xl tracking-tight">RA</div>
                 <div className="mt-4 text-[10px] tracking-[0.4em] uppercase text-blue-200">Founder</div>
