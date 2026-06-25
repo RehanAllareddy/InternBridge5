@@ -132,7 +132,7 @@ export const PARTNERS = [
     tagline: 'Research & Mentorship',
     description: 'Connecting motivated students with research mentors and leading academic institutions across the United States.',
     logo: nsriLogo,
-    url: 'https://nsri.org',
+    url: 'https://nsri.world',
     initials: 'NSRI',
     gradient: 'from-slate-500 to-slate-700',
     category: 'Research',
