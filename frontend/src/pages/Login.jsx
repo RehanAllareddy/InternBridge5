@@ -4,6 +4,8 @@ import { ArrowRight, Shield, Zap, Users } from 'lucide-react';
 import { signInWithGoogle } from '../firebase';
 import { useAuth } from '../context/AuthContext';
 import { STATS } from '../data/mock';
+import useScrollReveal from '../hooks/useScrollReveal';
+import { hoverPulseIn, hoverPulseOut } from '../lib/motion';
 
 const LOGO_URL = 'https://customer-assets.emergentagent.com/job_bridge-internships/artifacts/s66q0dn8_768da46f-eeb4-4784-a15e-97681d97e863.png';
 
@@ -32,6 +34,8 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/internships';
+  const leftPanelRef = useScrollReveal({ distance: 12 });
+  const rightPanelRef = useScrollReveal({ delay: 90, distance: 12 });
 
   useEffect(() => {
     if (user) navigate(from, { replace: true });
@@ -53,7 +57,7 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-[#f8fafc] flex">
       {/* Left panel — branding */}
-      <div className="hidden lg:flex lg:w-1/2 bg-slate-950 flex-col justify-between p-14">
+      <div ref={leftPanelRef} className="reveal hidden lg:flex lg:w-1/2 bg-slate-950 flex-col justify-between p-14">
         <div>
           <div className="bg-white rounded-lg p-2 inline-flex">
             <img src={LOGO_URL} alt="InternBridge" className="h-10 w-auto object-contain" />
@@ -108,7 +112,7 @@ export default function Login() {
       </div>
 
       {/* Right panel — sign in */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-16">
+      <div ref={rightPanelRef} className="reveal flex-1 flex flex-col items-center justify-center px-6 py-16">
         {/* Mobile logo */}
         <div className="lg:hidden mb-10">
           <img src={LOGO_URL} alt="InternBridge" className="h-12 w-auto object-contain" />
@@ -127,6 +131,8 @@ export default function Login() {
             <button
               onClick={handleGoogleSignIn}
               disabled={loading}
+              onMouseEnter={hoverPulseIn}
+              onMouseLeave={hoverPulseOut}
               className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all text-slate-900 font-semibold text-sm shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (

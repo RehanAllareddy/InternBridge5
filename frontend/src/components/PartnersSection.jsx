@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ExternalLink } from 'lucide-react';
-import useInView from '../hooks/useInView';
+import useScrollReveal from '../hooks/useScrollReveal';
+import useStaggerReveal from '../hooks/useStaggerReveal';
 import yriLogo from '../assets/images/1757383361622.jpeg';
 import cymaLogo from '../assets/images/1722077578724.jpeg';
 import caivoLogo from '../assets/images/charlotte_ai_vanguard_organization_logo.jpeg';
@@ -255,14 +256,14 @@ function FullPartnerCard({ partner }) {
  * !compact — full card grid for /partners page
  */
 export default function PartnersSection({ compact = false }) {
-  const [headerRef, headerVis] = useInView({ threshold: 0.1 });
-  const [gridRef, gridVis] = useInView({ threshold: 0.04 });
+  const headerRef = useScrollReveal();
+  const gridRef = useStaggerReveal({ staggerMs: compact ? 40 : 50 });
 
   if (compact) {
     return (
       <section className="bg-[#f8fafc] border-y border-slate-200 py-14 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
-          <div ref={headerRef} className={`sr-item flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10${headerVis ? ' sr-visible' : ''}`}>
+          <div ref={headerRef} className="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
               <div className="text-[10px] tracking-[0.4em] uppercase text-slate-400 mb-3">Our Network</div>
               <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">
@@ -281,10 +282,8 @@ export default function PartnersSection({ compact = false }) {
           </div>
 
           <div ref={gridRef} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
-            {PARTNERS.map((p, i) => (
-              <div key={p.id}
-                className={`sr-item${gridVis ? ' sr-visible' : ''}`}
-                style={{ transitionDelay: `${i * 40}ms` }}>
+            {PARTNERS.map((p) => (
+              <div key={p.id} className="reveal">
                 <CompactPartnerTile partner={p} />
               </div>
             ))}
@@ -298,10 +297,8 @@ export default function PartnersSection({ compact = false }) {
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24">
       <div className="text-[10px] tracking-[0.4em] uppercase text-slate-400 mb-6">Our Partners</div>
       <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {PARTNERS.map((p, i) => (
-          <div key={p.id}
-            className={`sr-item${gridVis ? ' sr-visible' : ''}`}
-            style={{ transitionDelay: `${i * 50}ms` }}>
+        {PARTNERS.map((p) => (
+          <div key={p.id} className="reveal">
             <FullPartnerCard partner={p} />
           </div>
         ))}

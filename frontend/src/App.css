@@ -36,25 +36,16 @@ html {
   background-size: 72px 72px;
 }
 
-/* ─── Scroll reveal ─────────────────────────────────── */
-/* Base hidden state — opacity + translate only (GPU composited) */
-.sr-item {
+/* ─── anime.js-driven reveal ────────────────────────── */
+/* Starting state only — anime.js (see src/lib/motion.js) animates opacity
+   and transform on scroll-in. This class just prevents a flash of visible
+   content before the observer fires. */
+.reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition:
-    opacity  0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.sr-item.sr-visible {
-  opacity: 1;
-  transform: none;
 }
 
-/* Honour reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .sr-item {
+  .reveal {
     opacity: 1;
-    transform: none;
-    transition: none;
   }
 }

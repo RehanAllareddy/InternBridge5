@@ -4,7 +4,10 @@ import { ArrowRight, ArrowUpRight, Lock } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { STATS, FIELD_TAGS, LATEST_PLACEMENTS, FEATURED, IMPACT } from '../data/mock';
 import PartnersSection from '../components/PartnersSection';
-import useInView from '../hooks/useInView';
+import useScrollReveal from '../hooks/useScrollReveal';
+import useStaggerReveal from '../hooks/useStaggerReveal';
+import useCountUp from '../hooks/useCountUp';
+import { hoverPulseIn, hoverPulseOut } from '../lib/motion';
 
 const FIELD_COLORS = {
   CS: 'bg-violet-500/20 text-violet-300 border-violet-500/30',
@@ -50,10 +53,15 @@ function LightFieldBadge({ field }) {
 
 export default function Home() {
   const { user } = useAuth();
-  const [statsRef, statsVis] = useInView({ threshold: 0.05 });
-  const [impactRef, impactVis] = useInView({ threshold: 0.05 });
-  const [featuredRef, featuredVis] = useInView({ threshold: 0.04 });
-  const [ctaRef, ctaVis] = useInView({ threshold: 0.1 });
+  const statsRef = useStaggerReveal({ staggerMs: 80 });
+  const impactColRef = useScrollReveal();
+  const impactGridRef = useStaggerReveal({ staggerMs: 90 });
+  const featuredRef = useStaggerReveal({ staggerMs: 75 });
+  const ctaRef = useScrollReveal();
+
+  const opportunitiesRef = useCountUp(STATS.opportunities);
+  const fieldsRef = useCountUp(STATS.fields);
+  const locationsRef = useCountUp(STATS.locations);
 
   return (
     <div className="bg-[#f8fafc] text-slate-900">
@@ -92,22 +100,22 @@ export default function Home() {
               <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-2 sm:gap-3">
                 {user ? (
                   <>
-                    <Link to="/internships"
+                    <Link to="/internships" onMouseEnter={hoverPulseIn} onMouseLeave={hoverPulseOut}
                       className="inline-flex items-center gap-2 bg-blue-600 text-white px-5 sm:px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded-lg hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/25">
                       Explore Internships <ArrowRight className="w-4 h-4" />
                     </Link>
-                    <Link to="/match"
+                    <Link to="/match" onMouseEnter={hoverPulseIn} onMouseLeave={hoverPulseOut}
                       className="inline-flex items-center gap-2 border border-white/20 text-white px-5 sm:px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded-lg hover:border-white/40 hover:bg-white/5 transition-all">
                       Find My Match
                     </Link>
                   </>
                 ) : (
                   <>
-                    <Link to="/login"
+                    <Link to="/login" onMouseEnter={hoverPulseIn} onMouseLeave={hoverPulseOut}
                       className="inline-flex items-center gap-2 bg-blue-600 text-white px-5 sm:px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded-lg hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/25">
                       Get Access — Free <ArrowRight className="w-4 h-4" />
                     </Link>
-                    <Link to="/about"
+                    <Link to="/about" onMouseEnter={hoverPulseIn} onMouseLeave={hoverPulseOut}
                       className="inline-flex items-center gap-2 border border-white/20 text-white/80 px-5 sm:px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded-lg hover:border-white/40 hover:text-white transition-all">
                       Learn More
                     </Link>
@@ -160,15 +168,15 @@ export default function Home() {
       <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 -mt-10 sm:-mt-14 pb-12 sm:pb-16 lg:pb-20">
         <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white rounded-2xl border border-slate-200/60 shadow-xl shadow-slate-900/10 px-6 sm:px-8 lg:px-12 py-8 sm:py-10 lg:py-12">
           {[
-            { v: `${STATS.opportunities}+`, l: 'Opportunities' },
-            { v: `${STATS.fields}+`, l: 'Fields' },
-            { v: `${STATS.locations}+`, l: 'Locations' },
+            { ref: opportunitiesRef, suffix: '+', l: 'Opportunities' },
+            { ref: fieldsRef, suffix: '+', l: 'Fields' },
+            { ref: locationsRef, suffix: '+', l: 'Locations' },
             { v: STATS.gradeLevel, l: 'Grade Level', small: true },
           ].map((s, i) => (
-            <div key={i}
-              className={`sr-item text-center md:text-left${statsVis ? ' sr-visible' : ''}`}
-              style={{ transitionDelay: `${i * 80}ms` }}>
-              <div className={`font-black tracking-tight text-slate-900 ${s.small ? 'text-2xl sm:text-3xl md:text-4xl pt-1 sm:pt-3' : 'text-4xl sm:text-5xl md:text-6xl'}`}>{s.v}</div>
+            <div key={i} className="reveal text-center md:text-left">
+              <div className={`font-black tracking-tight text-slate-900 ${s.small ? 'text-2xl sm:text-3xl md:text-4xl pt-1 sm:pt-3' : 'text-4xl sm:text-5xl md:text-6xl'}`}>
+                {s.ref ? <><span ref={s.ref}>0</span>{s.suffix}</> : s.v}
+              </div>
               <div className="mt-1.5 text-[9px] sm:text-[10px] tracking-[0.35em] uppercase text-slate-400">{s.l}</div>
             </div>
           ))}
@@ -176,9 +184,9 @@ export default function Home() {
       </section>
 
       {/* ── IMPACT ────────────────────────────────────────── */}
-      <section ref={impactRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-20 lg:pb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-20 lg:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-start">
-          <div className={`sr-item lg:col-span-1${impactVis ? ' sr-visible' : ''}`}>
+          <div ref={impactColRef} className="reveal lg:col-span-1">
             <div className="text-[10px] tracking-[0.4em] uppercase text-slate-400 mb-4">Our Impact</div>
             <h2 className="font-black uppercase leading-[0.95] tracking-tight text-[clamp(32px,6vw,64px)] text-slate-900">
               Real <span className="text-blue-600">Reach.</span>
@@ -188,11 +196,10 @@ export default function Home() {
               We&apos;re not just a directory. We&apos;ve actively shaped student journeys, built a growing community, and collaborated with peers from top universities.
             </p>
           </div>
-          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div ref={impactGridRef} className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {IMPACT.map((s, i) => (
               <div key={i}
-                className={`sr-item rounded-2xl border border-slate-200 bg-white p-6 sm:p-7 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-50 transition-all${impactVis ? ' sr-visible' : ''}`}
-                style={{ transitionDelay: `${(i + 1) * 90}ms` }}>
+                className="reveal rounded-2xl border border-slate-200 bg-white p-6 sm:p-7 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-50 transition-all">
                 <div className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900">{s.value}</div>
                 <div className="mt-3 text-[10px] tracking-[0.3em] uppercase font-semibold text-blue-600">{s.label}</div>
                 <p className="mt-3 text-sm text-slate-500 leading-relaxed">{s.desc}</p>
@@ -218,8 +225,7 @@ export default function Home() {
           <div ref={featuredRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {FEATURED.map((f, i) => (
               <div key={i}
-                className={`sr-item group rounded-2xl border border-slate-200 bg-[#f8fafc] p-5 sm:p-6 hover:border-blue-400 hover:bg-white hover:shadow-lg hover:shadow-blue-50/80 transition-all${featuredVis ? ' sr-visible' : ''}`}
-                style={{ transitionDelay: `${i * 75}ms` }}>
+                className="reveal group rounded-2xl border border-slate-200 bg-[#f8fafc] p-5 sm:p-6 hover:border-blue-400 hover:bg-white hover:shadow-lg hover:shadow-blue-50/80 transition-all">
                 <LightFieldBadge field={f.field} />
                 <h3 className="mt-3 text-[14px] sm:text-[15px] font-bold text-slate-900 group-hover:text-blue-600 leading-snug transition-colors">{f.title}</h3>
                 <div className="mt-5 pt-4 border-t border-slate-200 flex items-center justify-between">
@@ -253,8 +259,8 @@ export default function Home() {
       <PartnersSection compact />
 
       {/* ── CTA ───────────────────────────────────────────── */}
-      <section ref={ctaRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16 sm:py-20 lg:py-24">
-        <div className={`sr-item relative rounded-2xl sm:rounded-3xl bg-slate-950 overflow-hidden px-6 sm:px-10 py-12 sm:py-14 lg:py-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8${ctaVis ? ' sr-visible' : ''}`}>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16 sm:py-20 lg:py-24">
+        <div ref={ctaRef} className="reveal relative rounded-2xl sm:rounded-3xl bg-slate-950 overflow-hidden px-6 sm:px-10 py-12 sm:py-14 lg:py-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <div className="absolute inset-0 bg-line-grid" />
           <div className="absolute inset-0 pointer-events-none"
             style={{ background: 'radial-gradient(ellipse 60% 80% at 5% 50%, rgba(37,99,235,0.2) 0%, transparent 65%)' }} />
@@ -271,7 +277,7 @@ export default function Home() {
             </p>
           </div>
           <div className="relative flex-shrink-0 w-full lg:w-auto">
-            <Link to={user ? '/internships' : '/login'}
+            <Link to={user ? '/internships' : '/login'} onMouseEnter={hoverPulseIn} onMouseLeave={hoverPulseOut}
               className="w-full lg:w-auto inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-7 sm:px-8 py-4 text-[13px] font-semibold tracking-[0.18em] uppercase rounded-xl hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/30">
               {user ? 'Explore All Internships' : 'Get Free Access'} <ArrowRight className="w-4 h-4" />
             </Link>

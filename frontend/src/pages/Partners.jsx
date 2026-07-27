@@ -2,8 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Handshake, Sparkles, Network } from 'lucide-react';
 import PartnersSection from '../components/PartnersSection';
+import useStaggerReveal from '../hooks/useStaggerReveal';
+import { hoverPulseIn, hoverPulseOut } from '../lib/motion';
 
 export default function Partners() {
+  const whyPartnerRef = useStaggerReveal({ staggerMs: 90 });
+
   return (
     <div className="bg-[#f8fafc] text-slate-900">
 
@@ -43,6 +47,8 @@ export default function Partners() {
                 href="https://form.typeform.com/to/qzET9mgP"
                 target="_blank"
                 rel="noreferrer"
+                onMouseEnter={hoverPulseIn}
+                onMouseLeave={hoverPulseOut}
                 className="inline-flex items-center gap-2 bg-white text-slate-900 px-7 py-3.5 text-[12px] font-semibold tracking-[0.18em] uppercase rounded-xl hover:bg-blue-50 transition-colors shadow-lg"
               >
                 Get In Touch <ArrowRight className="w-4 h-4" />
@@ -60,13 +66,13 @@ export default function Partners() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
           <div className="text-[10px] tracking-[0.4em] uppercase text-slate-400 mb-4">Why Partner</div>
           <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 mb-10">What you get</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div ref={whyPartnerRef} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               { Icon: Handshake, t: 'Become a Partner', d: 'Offer mentorship and internship pathways to the next generation of motivated, driven students.' },
               { Icon: Sparkles, t: 'Featured Programs', d: 'Get spotlighted on our homepage and internship catalog with curated featured opportunity placements.' },
               { Icon: Network, t: 'Talent Pipeline', d: 'Build early relationships with high-potential high school and college students before anyone else.' },
             ].map(({ Icon, t, d }, i) => (
-              <div key={i} className="rounded-2xl border border-slate-200 bg-[#f8fafc] p-7 hover:border-blue-400 hover:bg-white hover:shadow-lg hover:shadow-blue-50 transition-all">
+              <div key={i} className="reveal rounded-2xl border border-slate-200 bg-[#f8fafc] p-7 hover:border-blue-400 hover:bg-white hover:shadow-lg hover:shadow-blue-50 transition-all">
                 <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-blue-50 text-blue-600 mb-5">
                   <Icon className="w-5 h-5" />
                 </div>

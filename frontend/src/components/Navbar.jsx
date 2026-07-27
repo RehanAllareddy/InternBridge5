@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Menu, X, LogOut, ChevronDown } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { signOutUser } from '../firebase';
+import { hoverPulseIn, hoverPulseOut } from '../lib/motion';
 
 const LOGO_URL = 'https://customer-assets.emergentagent.com/job_bridge-internships/artifacts/s66q0dn8_768da46f-eeb4-4784-a15e-97681d97e863.png';
 
@@ -121,6 +122,8 @@ export default function Navbar() {
           ) : (
             <Link
               to="/login"
+              onMouseEnter={hoverPulseIn}
+              onMouseLeave={hoverPulseOut}
               className="inline-flex items-center gap-2 bg-slate-900 text-white px-4 py-2 text-[12px] font-semibold tracking-[0.15em] uppercase rounded-lg hover:bg-blue-600 transition-colors"
             >
               Sign In
@@ -211,6 +214,8 @@ export default function Navbar() {
               <Link
                 to="/login"
                 onClick={() => setMobileOpen(false)}
+                onMouseEnter={hoverPulseIn}
+                onMouseLeave={hoverPulseOut}
                 className="flex items-center justify-center gap-2 w-full bg-slate-900 text-white py-3 text-[12px] font-semibold tracking-[0.15em] uppercase rounded-lg"
               >
                 Sign In with Google

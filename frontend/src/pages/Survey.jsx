@@ -2,6 +2,9 @@ import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Check, RefreshCw, Sparkles } from 'lucide-react';
 import { INTERNSHIPS, FIELD_TAGS } from '../data/mock';
+import useEnterOnChange from '../hooks/useEnterOnChange';
+import useStaggerOnChange from '../hooks/useStaggerOnChange';
+import { hoverPulseIn, hoverPulseOut } from '../lib/motion';
 
 const GRADES = [
   { id: 'HS', label: 'High School' },
@@ -70,10 +73,13 @@ export default function Survey() {
 
   const canSubmit = interests.length > 0 && grade && location && timing;
 
+  const stepRef = useEnterOnChange([step, submitted]);
+  const matchesRef = useStaggerOnChange([matches], { staggerMs: 55 });
+
   if (submitted) {
     return (
       <div className="bg-[#f8fafc] text-slate-900">
-        <section className="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-10">
+        <section ref={stepRef} className="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-10">
           <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4 inline-flex items-center gap-2">
             <Sparkles className="w-3 h-3 text-blue-600" /> Your Matches
           </div>
@@ -91,19 +97,19 @@ export default function Survey() {
             <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">{timing}</span>
           </div>
           <div className="mt-6 flex gap-3">
-            <button onClick={reset} className="inline-flex items-center gap-2 border border-slate-300 text-slate-900 px-5 py-2.5 text-[11px] font-semibold tracking-[0.18em] uppercase rounded hover:border-slate-900 transition-colors">
+            <button onClick={reset} onMouseEnter={hoverPulseIn} onMouseLeave={hoverPulseOut} className="inline-flex items-center gap-2 border border-slate-300 text-slate-900 px-5 py-2.5 text-[11px] font-semibold tracking-[0.18em] uppercase rounded hover:border-slate-900 transition-colors">
               <RefreshCw className="w-3.5 h-3.5" /> Retake Survey
             </button>
-            <Link to="/internships" className="inline-flex items-center gap-2 bg-slate-900 text-white px-5 py-2.5 text-[11px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-600 transition-colors">
+            <Link to="/internships" onMouseEnter={hoverPulseIn} onMouseLeave={hoverPulseOut} className="inline-flex items-center gap-2 bg-slate-900 text-white px-5 py-2.5 text-[11px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-600 transition-colors">
               Browse All <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </section>
 
         <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div ref={matchesRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {matches.map((i, idx) => (
-              <a key={i.id} href={i.url} target="_blank" rel="noreferrer" className="group rounded-xl border border-slate-200 bg-white p-6 hover:border-blue-500 hover:shadow-lg transition-all">
+              <a key={i.id} href={i.url} target="_blank" rel="noreferrer" onMouseEnter={hoverPulseIn} onMouseLeave={hoverPulseOut} className="reveal group rounded-xl border border-slate-200 bg-white p-6 hover:border-blue-500 hover:shadow-lg transition-all">
                 <div className="flex items-start justify-between">
                   <div className="text-[10px] tracking-[0.3em] uppercase font-semibold text-blue-600">{i.field}</div>
                   <div className="flex items-center gap-2">
@@ -148,7 +154,7 @@ export default function Survey() {
         <div className="mt-3 text-xs font-mono text-slate-500">Step {step} of 4</div>
       </section>
 
-      <section className="max-w-4xl mx-auto px-6 lg:px-10 pb-24">
+      <section ref={stepRef} className="max-w-4xl mx-auto px-6 lg:px-10 pb-24">
         {step === 1 && (
           <div>
             <h2 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900">Pick fields that excite you</h2>
@@ -172,6 +178,8 @@ export default function Survey() {
               <button
                 disabled={interests.length === 0}
                 onClick={() => setStep(2)}
+                onMouseEnter={hoverPulseIn}
+                onMouseLeave={hoverPulseOut}
                 className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Continue <ArrowRight className="w-4 h-4" />
@@ -204,6 +212,8 @@ export default function Survey() {
               <button
                 disabled={!grade}
                 onClick={() => setStep(3)}
+                onMouseEnter={hoverPulseIn}
+                onMouseLeave={hoverPulseOut}
                 className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Continue <ArrowRight className="w-4 h-4" />
@@ -238,6 +248,8 @@ export default function Survey() {
               <button
                 disabled={!location}
                 onClick={() => setStep(4)}
+                onMouseEnter={hoverPulseIn}
+                onMouseLeave={hoverPulseOut}
                 className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Continue <ArrowRight className="w-4 h-4" />
@@ -272,6 +284,8 @@ export default function Survey() {
               <button
                 disabled={!canSubmit}
                 onClick={() => { setSubmitted(true); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                onMouseEnter={hoverPulseIn}
+                onMouseLeave={hoverPulseOut}
                 className="inline-flex items-center gap-2 bg-blue-600 text-white px-7 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Show My Matches <Sparkles className="w-4 h-4" />

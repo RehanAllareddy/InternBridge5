@@ -3,6 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import { Search, ArrowUpRight, X, SlidersHorizontal } from 'lucide-react';
 import { INTERNSHIPS, FIELD_TAGS } from '../data/mock';
 import { useAuth } from '../context/AuthContext';
+import useStaggerOnChange from '../hooks/useStaggerOnChange';
+import { hoverPulseIn, hoverPulseOut } from '../lib/motion';
 
 const FIELD_COLORS = {
   CS: 'bg-violet-50 text-violet-700',
@@ -40,7 +42,9 @@ function InternshipCard({ internship }) {
       href={internship.url}
       target="_blank"
       rel="noreferrer"
-      className="group block rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-50 transition-all active:scale-[0.99]"
+      onMouseEnter={hoverPulseIn}
+      onMouseLeave={hoverPulseOut}
+      className="reveal group block rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-50 transition-all active:scale-[0.99]"
     >
       <div className="flex items-start justify-between gap-3">
         <FieldBadge field={internship.field} />
@@ -87,6 +91,8 @@ export default function Internships() {
       return okField && okQuery && okLoc;
     });
   }, [field, query, location]);
+
+  const cardGridRef = useStaggerOnChange([filtered], { staggerMs: 45 });
 
   const locations = useMemo(() => Array.from(new Set(INTERNSHIPS.map(i => i.location))).sort(), []);
   const hasFilters = field || query || location;
@@ -248,7 +254,7 @@ export default function Internships() {
                   {filtered.length} result{filtered.length !== 1 ? 's' : ''}
                   {field && <span> in <span className="font-semibold text-slate-700">{field}</span></span>}
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
+                <div ref={cardGridRef} className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
                   {filtered.map((internship) => (
                     <InternshipCard key={internship.id} internship={internship} />
                   ))}

@@ -2,14 +2,22 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, GraduationCap, Compass } from 'lucide-react';
 import { STATS } from '../data/mock';
-import useInView from '../hooks/useInView';
+import useScrollReveal from '../hooks/useScrollReveal';
+import useStaggerReveal from '../hooks/useStaggerReveal';
+import useCountUp from '../hooks/useCountUp';
+import { hoverPulseIn, hoverPulseOut } from '../lib/motion';
 
 export default function About() {
-  const [pillarsRef, pillarsVis] = useInView({ threshold: 0.05 });
-  const [missionRef, missionVis] = useInView({ threshold: 0.1 });
-  const [valuesRef, valuesVis] = useInView({ threshold: 0.05 });
-  const [statsRef, statsVis] = useInView({ threshold: 0.1 });
-  const [founderRef, founderVis] = useInView({ threshold: 0.08 });
+  const pillarsRef = useStaggerReveal({ staggerMs: 90 });
+  const missionColRef = useScrollReveal();
+  const valuesRef = useStaggerReveal({ staggerMs: 100 });
+  const statsRef = useStaggerReveal({ staggerMs: 80 });
+  const founderRef = useStaggerReveal({ staggerMs: 120 });
+
+  const opportunitiesRef = useCountUp(STATS.opportunities);
+  const fieldsRef = useCountUp(STATS.fields);
+  const locationsRef = useCountUp(STATS.locations);
+  const freeAccessRef = useCountUp(100);
 
   return (
     <div className="bg-[#f8fafc] text-slate-900">
@@ -34,8 +42,7 @@ export default function About() {
             { Icon: Compass, t: 'Career Discovery', d: 'Explore 50+ fields from STEM to arts, helping you discover passions before choosing a college path.' },
           ].map(({ Icon, t, d }, i) => (
             <div key={i}
-              className={`sr-item rounded-xl border border-slate-200 bg-white p-8 hover:border-blue-500 hover:shadow-lg transition-all${pillarsVis ? ' sr-visible' : ''}`}
-              style={{ transitionDelay: `${i * 90}ms` }}>
+              className="reveal rounded-xl border border-slate-200 bg-white p-8 hover:border-blue-500 hover:shadow-lg transition-all">
               <div className="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-blue-50 text-blue-600 mb-5">
                 <Icon className="w-5 h-5" />
               </div>
@@ -47,9 +54,9 @@ export default function About() {
       </section>
 
       {/* Mission */}
-      <section ref={missionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start border-t border-slate-200 pt-16">
-          <div className={`sr-item${missionVis ? ' sr-visible' : ''}`}>
+          <div ref={missionColRef} className="reveal">
             <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4">Our Mission</div>
             <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-[1.05] text-slate-900">
               Democratize access to <span className="text-blue-600">career-building</span> experiences.
@@ -59,7 +66,8 @@ export default function About() {
             <p className="text-slate-600 text-[15px] leading-relaxed">
               No matter your background, zip code, or connections — the right internship is out there for you. We believe every student deserves the chance to explore, grow, and bridge the gap between where they are and where they want to be.
             </p>
-            <Link to="/internships" className="mt-7 inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-600 transition-colors">
+            <Link to="/internships" onMouseEnter={hoverPulseIn} onMouseLeave={hoverPulseOut}
+              className="mt-7 inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase rounded hover:bg-blue-600 transition-colors">
               Start Exploring <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -76,8 +84,7 @@ export default function About() {
             { n: '03', t: 'Community', d: 'InternBridge is a student-first network. We build genuine pathways, not resume-padding shortcuts.' },
           ].map((v, i) => (
             <div key={i}
-              className={`sr-item border-t border-slate-900 pt-6${valuesVis ? ' sr-visible' : ''}`}
-              style={{ transitionDelay: `${i * 100}ms` }}>
+              className="reveal border-t border-slate-900 pt-6">
               <div className="font-mono text-xs text-slate-500">{v.n}</div>
               <h3 className="mt-4 text-xl font-bold text-slate-900">{v.t}</h3>
               <p className="mt-3 text-sm text-slate-600 leading-relaxed">{v.d}</p>
@@ -90,15 +97,15 @@ export default function About() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24">
         <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-b border-slate-200 py-12">
           {[
-            { v: `${STATS.opportunities}+`, l: 'Opportunities' },
-            { v: `${STATS.fields}+`, l: 'Fields Covered' },
-            { v: `${STATS.locations}+`, l: 'Locations' },
-            { v: '100%', l: 'Free Access' },
+            { ref: opportunitiesRef, suffix: '+', l: 'Opportunities' },
+            { ref: fieldsRef, suffix: '+', l: 'Fields Covered' },
+            { ref: locationsRef, suffix: '+', l: 'Locations' },
+            { ref: freeAccessRef, suffix: '%', l: 'Free Access' },
           ].map((s, i) => (
-            <div key={i}
-              className={`sr-item text-center md:text-left${statsVis ? ' sr-visible' : ''}`}
-              style={{ transitionDelay: `${i * 80}ms` }}>
-              <div className="text-5xl md:text-6xl font-black tracking-tight text-slate-900">{s.v}</div>
+            <div key={i} className="reveal text-center md:text-left">
+              <div className="text-5xl md:text-6xl font-black tracking-tight text-slate-900">
+                <span ref={s.ref}>0</span>{s.suffix}
+              </div>
               <div className="mt-2 text-[10px] tracking-[0.4em] uppercase text-slate-500">{s.l}</div>
             </div>
           ))}
@@ -106,10 +113,10 @@ export default function About() {
       </section>
 
       {/* Founder */}
-      <section ref={founderRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-28">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-28">
         <div className="text-[10px] tracking-[0.4em] uppercase text-slate-500 mb-4">Meet The Founder</div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-start">
-          <div className={`sr-item lg:col-span-1${founderVis ? ' sr-visible' : ''}`}>
+        <div ref={founderRef} className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-start">
+          <div className="reveal lg:col-span-1">
             <div className="aspect-square w-full max-w-[220px] sm:max-w-sm mx-auto lg:mx-0 rounded-2xl bg-gradient-to-br from-slate-900 via-[#0b1326] to-blue-700 flex items-center justify-center text-white shadow-xl">
               <div className="text-center px-6">
                 <div className="font-black text-7xl tracking-tight">RA</div>
@@ -117,7 +124,7 @@ export default function About() {
               </div>
             </div>
           </div>
-          <div className={`sr-item lg:col-span-2${founderVis ? ' sr-visible' : ''}`} style={{ transitionDelay: '120ms' }}>
+          <div className="reveal lg:col-span-2">
             <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-[1.05] text-slate-900">
               Rehan <span className="text-blue-600">Allareddy</span>
             </h2>
